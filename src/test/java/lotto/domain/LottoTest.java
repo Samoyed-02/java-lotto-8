@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.Lotto.Lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -21,5 +22,25 @@ class LottoTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    // TODO: 추가 기능 구현에 따른 테스트 코드 작성
+    @DisplayName("로또 번호가 범위보다 클 경우 예외 발생")
+    @Test
+    void 로또_번호가_너무커() {
+        assertThatThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5, 46)))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("로또 번호가 범위보다 작을 경우 예외 발생")
+    @Test
+    void 로또_번호가_너무작아() {
+        assertThatThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5, 0)))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("로또 번호가 음수일 경우 예외 발생")
+    @Test
+    void 로또_번호가_음수() {
+        assertThatThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5, -10)))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
 }
