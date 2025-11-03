@@ -1,7 +1,9 @@
-package lotto.domain.Amount;
+package lotto.domain.amount;
 
 import java.util.List;
-import lotto.domain.validation.AmountValidation.AmountValidationRule;
+import lotto.domain.validation.amount.AmountRuleRegistry;
+import lotto.domain.validation.amount.AmountValidationRule;
+import lotto.domain.validation.amount.AmountValidator;
 
 public class Amount {
 
