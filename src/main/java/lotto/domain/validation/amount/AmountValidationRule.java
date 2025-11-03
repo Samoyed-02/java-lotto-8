@@ -1,4 +1,4 @@
-package lotto.domain.validation.AmountValidation;
+package lotto.domain.validation.amount;
 
 public interface AmountValidationRule {
     void validate(Integer amount);
