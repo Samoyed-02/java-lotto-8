@@ -1,6 +1,5 @@
-package lotto.domain;
+package lotto.domain.validation.amount;
 
-import lotto.domain.Amount.AmountNumberConverter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -17,7 +16,7 @@ class AmountConvertTest {
         String testInputView = "1000";
         int except = 1000;
         AmountNumberConverter convert = new AmountNumberConverter();
-        int result = AmountNumberConverter.convert(testInputView);
+        int result = convert.convert(testInputView);
         assertThat(result).isEqualTo(except);
     }
 
@@ -25,7 +24,8 @@ class AmountConvertTest {
     @ValueSource(strings = {" ", "1 1000"})
     @DisplayName("입력이 없거나 중간에 비었으면 예외 발생")
     void 텍스트_스페이스_포함(String testInputView) {
-        assertThatThrownBy(() -> AmountNumberConverter.convert(testInputView))
+        AmountNumberConverter convert = new AmountNumberConverter();
+        assertThatThrownBy(() -> convert.convert(testInputView))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -35,7 +35,7 @@ class AmountConvertTest {
     void 앞뒤_공백_처리(String testInputView) {
         int except = 1000;
         AmountNumberConverter convert = new AmountNumberConverter();
-        int result = AmountNumberConverter.convert(testInputView);
+        int result = convert.convert(testInputView);
         assertThat(result).isEqualTo(except);
     }
 }
