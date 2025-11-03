@@ -1,8 +1,8 @@
-package lotto.domain;
+package lotto.domain.validation.lotto;
 
 import java.util.Arrays;
 import java.util.List;
-import lotto.domain.Lotto.LottoNumberConverter;
+import lotto.domain.lotto.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -17,9 +17,15 @@ public class LottoConvertTest {
     @Test
     void 텍스트_입력_테스트() {
         String testInputView = "1,2,3,4,5,6";
-        List<Integer> excepted = Arrays.asList(1, 2, 3, 4, 5, 6);
+        List<LottoNumber> excepted = Arrays.asList(
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(6));
         LottoNumberConverter convert = new LottoNumberConverter();
-        List<Integer> result = LottoNumberConverter.convert(testInputView);
+        List<LottoNumber> result = convert.convert(testInputView);
         assertThat(result).isEqualTo(excepted);
     }
 
@@ -27,7 +33,8 @@ public class LottoConvertTest {
     @ParameterizedTest
     @ValueSource(strings = {"1,,2,3,4,5", "1,2,3,4,5,4 3"})
     void 입력_비었거나_띄어쓰면_예외발생(String testInputView) {
-        assertThatThrownBy(() -> LottoNumberConverter.convert(testInputView))
+        LottoNumberConverter convert = new LottoNumberConverter();
+        assertThatThrownBy(() -> convert.convert(testInputView))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -35,9 +42,15 @@ public class LottoConvertTest {
     @ParameterizedTest
     @ValueSource(strings = {" 1,2,3,4,5,6", "1,2,3,4,5,6 "})
     void 입력_앞뒤_공백_처리(String testInputView) {
-        List<Integer> excepted = Arrays.asList(1, 2, 3, 4, 5, 6);
+        List<LottoNumber> excepted = Arrays.asList(
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(6));
         LottoNumberConverter convert = new LottoNumberConverter();
-        List<Integer> result = LottoNumberConverter.convert(testInputView);
+        List<LottoNumber> result = convert.convert(testInputView);
         assertThat(result).isEqualTo(excepted);
     }
 }
