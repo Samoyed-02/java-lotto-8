@@ -1,6 +1,6 @@
-package lotto.domain;
+package lotto.domain.amount;
 
-import lotto.domain.Amount.Amount;
+import lotto.exception.InputException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -16,7 +16,6 @@ class AmountTest {
     void 금액_생성_테스트() {
         int testAmount = 3000;
         Amount amount = Amount.create(testAmount);
-
         assertThat(amount.getAmount()).isEqualTo(testAmount);
     }
 
@@ -25,15 +24,16 @@ class AmountTest {
     @ValueSource(ints = {0, -100})
     void 허용안한_금액_예외_처리(int testAmount) {
         assertThatThrownBy(() -> Amount.create(testAmount))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(InputException.AMOUNT_ZERO_MINUS.getMessage());
     }
 
     @Test
     @DisplayName("금액 제한을 넘으면 예외 발생")
     void 금액_제한_예외_처리() {
         int testAmount = 101000;
-        assertThatThrownBy(() ->Amount.create(testAmount))
-                .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> Amount.create(testAmount))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(InputException.AMOUNT_OVER.getMessage());
     }
-
 }
