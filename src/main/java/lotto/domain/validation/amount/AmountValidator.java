@@ -1,8 +1,7 @@
 
-package lotto.domain.Amount;
+package lotto.domain.validation.amount;
 
 import java.util.List;
-import lotto.domain.validation.AmountValidation.AmountValidationRule;
 
 public class AmountValidator {
 
@@ -13,7 +12,7 @@ public class AmountValidator {
     }
 
     public void validate(Integer amount) {
-        for (AmountValidationRule rule : rules) {
+        for (AmountValidationRule rule : this.rules) {
             rule.validate(amount);
         }
     }
