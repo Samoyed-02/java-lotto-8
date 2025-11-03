@@ -1,4 +1,4 @@
-package lotto.domain.validation.AmountValidation;
+package lotto.domain.validation.amount;
 
 import lotto.exception.InputException;
 
