@@ -1,10 +1,6 @@
-package lotto.domain.Amount;
+package lotto.domain.validation.amount;
 
 import java.util.List;
-import lotto.domain.validation.AmountValidation.AmountValidationRule;
-import lotto.domain.validation.AmountValidation.ValidateAmountIndivisible;
-import lotto.domain.validation.AmountValidation.ValidateAmountOver;
-import lotto.domain.validation.AmountValidation.ValidateAmountZeroMinus;
 
 public class AmountRuleRegistry {
     private static final List<AmountValidationRule> AMOUNT_RULES = List.of(
